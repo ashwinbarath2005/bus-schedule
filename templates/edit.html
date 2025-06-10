@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% if bus %}Edit{% else %}Add{% endif %} Bus</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>{% if bus %}EDIT{% else %}Add{% endif %} BUS SCHEDULE</h1>
+    <form method="POST">
+      <input type="text" name="name" value="{{ bus[1] if bus else '' }}" placeholder="Bus Name" required>
+      <input type="text" name="source" value="{{ bus[2] if bus else '' }}" placeholder="Source" required>
+      <input type="text" name="destination" value="{{ bus[3] if bus else '' }}" placeholder="Destination" required>
+      <input id="timepicker" type="text" name="time" value="{{ bus[4] if bus else '' }}" placeholder="Time (e.g., 08:30 PM)" required>
+
+      <button type="submit">{% if bus %}Update{% else %}Submit{% endif %}</button>
+    </form>
+    <a href="/" class="btn">Back</a>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    flatpickr("#timepicker", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K",   // 12-hour format with AM/PM
+        time_24hr: false,      // 12-hour clock
+        minuteIncrement: 1,    // Minutes increase by 1
+        inline: true           // Show picker always visible
+    });
+    </script>
+
+</body>
+</html>
